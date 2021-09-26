@@ -22,11 +22,10 @@ public class Sinuca {
 	private Cliente cliente;
 	
 	private LocalDateTime dataAbertura;
-	private LocalDateTime dataRecebimento;
 	private LocalDateTime dataFechamento;
 	private Integer contadorFicha;
 	private BigDecimal vlrFicha;
-	private Double porcentagem;
+	private Double porcentagemEmpresa;
 	private Double porcentagemCliente;
 	private Integer patrimonio;
 	
@@ -57,14 +56,6 @@ public class Sinuca {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDateTime getDataRecebimento() {
-		return dataRecebimento;
-	}
-
-	public void setDataRecebimento(LocalDateTime dataRecebimento) {
-		this.dataRecebimento = dataRecebimento;
-	}
-
 	public LocalDateTime getDataFechamento() {
 		return dataFechamento;
 	}
@@ -89,12 +80,12 @@ public class Sinuca {
 		this.vlrFicha = vlrFicha;
 	}
 
-	public Double getPorcentagem() {
-		return porcentagem;
+	public Double getPorcentagemEmpresa() {
+		return porcentagemEmpresa;
 	}
 
-	public void setPorcentagem(Double porcentagem) {
-		this.porcentagem = porcentagem;
+	public void setPorcentagemEmpresa(Double porcentagemEmpresa) {
+		this.porcentagemEmpresa = porcentagemEmpresa;
 	}
 
 	public Double getPorcentagemCliente() {
