@@ -10,6 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.validationgroups.ValidationsGroups;
 
 @Entity
 public class Sinuca {
@@ -18,20 +26,37 @@ public class Sinuca {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Valid
+	@ConvertGroup(from = Default.class, to = ValidationsGroups.ClienteId.class)
+	@NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataAbertura;
-	private LocalDateTime dataFechamento;
-	private Integer contadorFicha;
-	private BigDecimal vlrFicha;
-	private Double porcentagemEmpresa;
-	private Double porcentagemCliente;
-	private Integer patrimonio;
 	
+	@JsonProperty(access = Access.READ_ONLY)
+	private LocalDateTime dataFechamento;
+	
+	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusSinuca status;
-
+	
+	@NotNull
+	private Integer contadorFicha;
+	
+	@NotNull
+	private BigDecimal vlrFicha;
+	
+	@NotNull
+	private Double porcentagemEmpresa;
+	
+	@NotNull
+	private Double porcentagemCliente;
+	
+	@NotNull
+	private Integer patrimonio;
+	
 	public Long getId() {
 		return id;
 	}

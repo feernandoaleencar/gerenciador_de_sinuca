@@ -6,11 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fernandoalencar.gerenciador_de_sinuca.domain.validationgroups.ValidationsGroups;
 
 @Entity
 public class Cliente {
 	
+	@NotNull(groups = ValidationsGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

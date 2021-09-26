@@ -1,5 +1,7 @@
 package com.fernandoalencar.gerenciador_de_sinuca.api.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +22,7 @@ public class SinucaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Sinuca criar(@RequestBody Sinuca sinuca) {
+	public Sinuca criar(@Valid @RequestBody Sinuca sinuca) {
 		return sinucaService.criar(sinuca);
 	}
 	
