@@ -26,17 +26,22 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.service.ClienteService;
 @RequestMapping("/clientes")
 public class ClienteController {
 	
+	//Atributos da classe
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
 	@Autowired
 	private ClienteService clienteService;
 	
+	
+	//Método listar clientes
 	@GetMapping
 	public List<Cliente> listar(){
 		return clienteRepository.findAll();
 	}
 	
+	
+	//Método listar clientes pesquisando por ID 
 	@GetMapping("/{clienteId}")
 	public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId){
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
@@ -47,12 +52,15 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	//Método adicionar cliente
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
 		return clienteService.salvar(cliente);
 	}
 	
+	
+	//Método atualizar cliente
 	@PutMapping("/{clienteId}")
 	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente){
 		
@@ -66,6 +74,8 @@ public class ClienteController {
 		return ResponseEntity.ok(cliente);
 	}
 	
+	
+	//Método excluir cliente 
 	@DeleteMapping("/{clienteId}")
 	public ResponseEntity<Void> remover(@PathVariable Long clienteId){
 		

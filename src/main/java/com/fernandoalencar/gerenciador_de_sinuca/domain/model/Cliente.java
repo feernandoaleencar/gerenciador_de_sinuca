@@ -14,6 +14,7 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.validationgroups.Validat
 @Entity
 public class Cliente {
 	
+	//Atributos da classe cliente
 	@NotNull(groups = ValidationsGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,7 @@ public class Cliente {
 	@Size(max = 20)
 	private String cidade;
 	
+	//Métodos Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -99,7 +101,9 @@ public class Cliente {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
+	
+	
+	//Método Equals e Hashcode
 	@Override
 	public int hashCode() {
 		final int prime = 31;

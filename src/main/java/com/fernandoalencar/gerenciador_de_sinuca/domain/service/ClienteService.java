@@ -10,9 +10,11 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.ClienteReposi
 @Service
 public class ClienteService {
 	
+	//Atributos da classe
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	//Método metodo para salvar cliente com validação de email e cliente existente
 	public Cliente salvar(Cliente cliente) {
 		
 		Cliente clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
@@ -24,6 +26,7 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 	
+	//Método para excluir o cliente
 	public void excluir(Long clienteId) {
 		clienteRepository.deleteById(clienteId);
 	}
