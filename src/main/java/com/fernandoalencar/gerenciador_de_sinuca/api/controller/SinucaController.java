@@ -1,12 +1,15 @@
 package com.fernandoalencar.gerenciador_de_sinuca.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +39,17 @@ public class SinucaController {
 	@GetMapping
 	public List<Sinuca> listar(){
 		return sinucaRepository.findAll(); 
+	}
+	
+	@GetMapping("/{sinucaId}")
+	public ResponseEntity<Sinuca> buscar(@PathVariable Long sinucaId){
+		 Optional<Sinuca> sinuca = sinucaRepository.findById(sinucaId); 
+		 
+		 if (sinuca.isPresent()) {
+			 return ResponseEntity.ok(sinuca.get());
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 }

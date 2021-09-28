@@ -1,6 +1,7 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class SinucaService {
 		
 		sinuca.setCliente(cliente);
 		sinuca.setStatus(StatusSinuca.DISPONIVEL);
-		sinuca.setDataAbertura(LocalDateTime.now());
+		sinuca.setDataAbertura(OffsetDateTime.now());
 		
 		return sinucaRepository.save(sinuca);
 	}
