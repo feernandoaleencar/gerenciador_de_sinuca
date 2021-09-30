@@ -1,6 +1,5 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.service;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,10 +17,11 @@ public class ClienteService {
 	//Método metodo para salvar cliente com validação de email e cliente existente
 	public Cliente salvar(Cliente cliente) {
 		
-		Cliente clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
+		//Cliente clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
+		Cliente clienteExistente = clienteRepository.findByCpf(cliente.getCpf());
 		
 		if (clienteExistente != null && !clienteExistente.equals(cliente)) {
-			throw new NegocioException("Email já cadastrado em outro cliente.");
+			throw new NegocioException("Email ou CPF já cadastrado em outro cliente.");
 		}
 		
 		return clienteRepository.save(cliente);
