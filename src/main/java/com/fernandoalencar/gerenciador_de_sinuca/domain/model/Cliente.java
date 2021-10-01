@@ -48,9 +48,6 @@ public class Cliente {
 	@Size(max = 20)
 	private String cidade;
 	
-	@OneToMany
-	private List<Sinuca> sinuca;
-	
 	//Métodos Getters e Setters
 	public Long getId() {
 		return id;
