@@ -9,7 +9,7 @@ public class SinucaInputModel {
 	
 	@Valid
 	@NotNull
-	private ClienteIdInputModel clienteId;
+	private ClienteIdInputModel cliente;
 
 	@NotNull
 	private Integer contadorFicha;
@@ -26,12 +26,12 @@ public class SinucaInputModel {
 	@NotNull
 	private Integer patrimonio;
 
-	public ClienteIdInputModel getClienteId() {
-		return clienteId;
+	public ClienteIdInputModel getCliente() {
+		return cliente;
 	}
 
-	public void setClienteId(ClienteIdInputModel clienteId) {
-		this.clienteId = clienteId;
+	public void setCliente(ClienteIdInputModel cliente) {
+		this.cliente = cliente;
 	}
 
 	public Integer getContadorFicha() {

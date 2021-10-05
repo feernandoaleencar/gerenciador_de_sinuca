@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaInputModel;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaModel;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;
@@ -38,7 +39,8 @@ public class SinucaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public SinucaModel criar(@Valid @RequestBody Sinuca sinuca) {
+	public SinucaModel criar(@Valid @RequestBody SinucaInputModel sinucaInputModel) {
+		Sinuca sinuca = toEntity(sinucaInputModel);
 		return toModel(sinucaService.criar(sinuca));
 	}
 	
@@ -66,5 +68,9 @@ public class SinucaController {
 	
 	private List<SinucaModel> toCollectionModel(List<Sinuca> sinucas){
 		return sinucas.stream().map(sinuca -> toModel(sinuca)).collect(Collectors.toList());
+	}
+	
+	private Sinuca toEntity(SinucaInputModel sinucaInputModel) {
+		return modelMapper.map(sinucaInputModel, Sinuca.class);
 	}
 }
