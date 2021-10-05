@@ -2,6 +2,7 @@ package com.fernandoalencar.gerenciador_de_sinuca.api.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,13 +38,13 @@ public class SinucaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Sinuca criar(@Valid @RequestBody Sinuca sinuca) {
-		return sinucaService.criar(sinuca);
+	public SinucaModel criar(@Valid @RequestBody Sinuca sinuca) {
+		return toModel(sinucaService.criar(sinuca));
 	}
 	
 	@GetMapping
-	public List<Sinuca> listar(){
-		return sinucaRepository.findAll(); 
+	public List<SinucaModel> listar(){
+		return toCollectionModel(sinucaRepository.findAll()); 
 	}
 	
 	@GetMapping("/{sinucaId}")
@@ -51,7 +52,7 @@ public class SinucaController {
 		 Optional<Sinuca> sinuca = sinucaRepository.findById(sinucaId); 
 		 
 		 if (sinuca.isPresent()) {
-			 SinucaModel sinucamodel = modelMapper.map(sinuca.get(), SinucaModel.class);
+			 SinucaModel sinucamodel = toModel(sinuca.get());
 			 return ResponseEntity.ok(sinucamodel);
 		}
 		
@@ -59,5 +60,11 @@ public class SinucaController {
 	}
 	
 	
+	private SinucaModel toModel(Sinuca sinuca) {
+		return 	modelMapper.map(sinuca, SinucaModel.class);	
+	}
 	
+	private List<SinucaModel> toCollectionModel(List<Sinuca> sinucas){
+		return sinucas.stream().map(sinuca -> toModel(sinuca)).collect(Collectors.toList());
+	}
 }
