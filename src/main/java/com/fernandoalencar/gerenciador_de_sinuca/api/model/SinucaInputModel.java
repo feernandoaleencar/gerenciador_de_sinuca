@@ -1,53 +1,37 @@
 package com.fernandoalencar.gerenciador_de_sinuca.api.model;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
-import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
-public class SinucaModel {
+public class SinucaInputModel {
+	
+	@Valid
+	@NotNull
+	private ClienteIdInputModel clienteId;
 
-	private Long id;
-	private ClienteResumoModal cliente;
-	private OffsetDateTime dataAbertura;
-	private OffsetDateTime dataFechamento;
-	private StatusSinuca status;
+	@NotNull
 	private Integer contadorFicha;
+	
+	@NotNull
 	private BigDecimal vlrFicha;
+	
+	@NotNull
 	private Double porcentagemEmpresa;
+	
+	@NotNull
 	private Double porcentagemCliente;
+	
+	@NotNull
 	private Integer patrimonio;
 
-	public Long getId() {
-		return id;
+	public ClienteIdInputModel getClienteId() {
+		return clienteId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public OffsetDateTime getDataAbertura() {
-		return dataAbertura;
-	}
-
-	public void setDataAbertura(OffsetDateTime dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-	public OffsetDateTime getDataFechamento() {
-		return dataFechamento;
-	}
-
-	public void setDataFechamento(OffsetDateTime dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
-	public StatusSinuca getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusSinuca status) {
-		this.status = status;
+	public void setClienteId(ClienteIdInputModel clienteId) {
+		this.clienteId = clienteId;
 	}
 
 	public Integer getContadorFicha() {
@@ -88,14 +72,6 @@ public class SinucaModel {
 
 	public void setPatrimonio(Integer patrimonio) {
 		this.patrimonio = patrimonio;
-	}
-
-	public ClienteResumoModal getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(ClienteResumoModal cliente) {
-		this.cliente = cliente;
 	}
 
 }
