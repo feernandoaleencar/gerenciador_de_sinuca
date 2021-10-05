@@ -27,19 +27,12 @@ public class Sinuca {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ConvertGroup(from = Default.class, to = ValidationsGroups.ClienteId.class)
-	@NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataAbertura;
-	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFechamento;
-	
-	@JsonProperty(access = Access.READ_ONLY)
+
 	@Enumerated(EnumType.STRING)
 	private StatusSinuca status;
 	

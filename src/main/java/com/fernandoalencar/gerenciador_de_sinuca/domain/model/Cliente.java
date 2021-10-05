@@ -18,7 +18,6 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.validationgroups.Validat
 public class Cliente {
 	
 	//Atributos da classe cliente
-	@NotNull(groups = ValidationsGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
