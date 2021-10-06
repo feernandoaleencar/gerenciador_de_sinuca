@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaInputModel;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaModel;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;
@@ -85,8 +86,10 @@ public class SinucaController {
 			
 			if (sinucaRepository.equals(StatusSinuca.ENCERRADA)) {
 				sinucaService.excluir(sinucaId);				
+				return ResponseEntity.noContent().build();
+			} else {
+				throw new NegocioException("Verifique o status da sinuca.");
 			}
 			
-			return ResponseEntity.noContent().build();
 		}
 }
