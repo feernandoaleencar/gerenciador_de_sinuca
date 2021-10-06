@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaInputModel;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaModel;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.service.SinucaService;
 
@@ -73,4 +75,17 @@ public class SinucaController {
 	private Sinuca toEntity(SinucaInputModel sinucaInputModel) {
 		return modelMapper.map(sinucaInputModel, Sinuca.class);
 	}
+	
+	//Método excluir cliente 
+		@DeleteMapping("/{sinucaId}")
+		public ResponseEntity<Void> remover(@RequestBody SinucaModel sinucaModel, @PathVariable Long sinucaId){
+			
+			if (!sinucaRepository.existsById(sinucaId) && sinucaModel.getStatus().equals("ENCERRADA")) {
+				return ResponseEntity.notFound().build();
+			}
+			
+			sinucaService.excluir(sinucaId);
+			
+			return ResponseEntity.noContent().build();
+		}
 }

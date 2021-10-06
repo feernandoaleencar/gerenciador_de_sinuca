@@ -31,4 +31,8 @@ public class SinucaService {
 		
 		return sinucaRepository.save(sinuca);
 	}
+	
+	public void excluir(Long sinucaId) {
+		sinucaRepository.deleteById(sinucaId);
+	}
 }
