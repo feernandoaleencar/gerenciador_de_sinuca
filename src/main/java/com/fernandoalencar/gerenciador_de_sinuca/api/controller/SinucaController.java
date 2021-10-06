@@ -79,11 +79,13 @@ public class SinucaController {
 	//Método excluir cliente 
 		@DeleteMapping("/{sinucaId}")
 		public ResponseEntity<Void> remover(@PathVariable Long sinucaId){
-			if (!sinucaRepository.existsById(sinucaId) && sinucaRepository.equals(StatusSinuca.ENCERRADA) ) {
+			if (!sinucaRepository.existsById(sinucaId)) {
 				return ResponseEntity.notFound().build();
 			}
 			
-			sinucaService.excluir(sinucaId);
+			if (sinucaRepository.equals(StatusSinuca.ENCERRADA)) {
+				sinucaService.excluir(sinucaId);				
+			}
 			
 			return ResponseEntity.noContent().build();
 		}
