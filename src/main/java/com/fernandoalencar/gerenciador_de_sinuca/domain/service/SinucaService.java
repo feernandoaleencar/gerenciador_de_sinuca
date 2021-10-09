@@ -42,12 +42,6 @@ public class SinucaService {
 		Cliente cliente = clienteRepository.findById(sinuca.getCliente().getId())
 				.orElseThrow(() -> new NegocioException("Cliente não encontrado"));
 		
-		Optional<Sinuca> sinucaExistente = sinucaRepository.findById(sinuca.getId());
-		
-		if (sinucaExistente != null && sinucaExistente.equals(sinuca)) {
-			throw new NegocioException("Sinuca não localizada");
-		}
-
 		return sinucaRepository.save(sinuca);
 	}
 }
