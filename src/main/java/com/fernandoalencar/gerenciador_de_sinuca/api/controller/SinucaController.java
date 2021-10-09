@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaInputModel;
 import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaModel;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Cliente;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;
@@ -75,18 +77,18 @@ public class SinucaController {
 	private Sinuca toEntity(SinucaInputModel sinucaInputModel) {
 		return modelMapper.map(sinucaInputModel, Sinuca.class);
 	}
-
+	
 	// Método excluir cliente
 
 	@DeleteMapping("/{sinucaId}")
 	public ResponseEntity<Void> remover(@PathVariable Long sinucaId) {
 		
-		//verifica se o cliente existe
+		//verificar se o cliente existe
 		if (!sinucaRepository.existsById(sinucaId)) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		//verifica o status e datafechamento
+		//verificar o status e datafechamento
 		if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)
 				&& (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
 			sinucaService.excluir(sinucaId);
@@ -100,4 +102,20 @@ public class SinucaController {
 		}	
 
 	}
+	
+	//Método atualizar sinuca
+	@PutMapping("/{sinucaId}")
+	public ResponseEntity<Sinuca> atualizar(@Valid @PathVariable Long sinucaId, @RequestBody Sinuca sinuca){
+		
+		if (!sinucaRepository.existsById(sinucaId)) {
+			return ResponseEntity.notFound().build(); 
+		}
+		
+		sinuca.setId(sinucaId);
+		sinuca = sinucaService.atualizar(sinuca);
+		
+		return ResponseEntity.ok(sinuca);
+	}
+	
+	
 }
