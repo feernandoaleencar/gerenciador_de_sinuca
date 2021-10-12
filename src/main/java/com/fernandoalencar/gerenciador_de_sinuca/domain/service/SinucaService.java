@@ -107,6 +107,14 @@ public class SinucaService {
 		
 		sinucaRepository.save(sinuca);
 	}
+	
+	public void quebrarSinuca(Long sinucaId) {
+		Sinuca sinuca = verificarSinuca(sinucaId);
+		
+		sinuca.quebrarSinuca();
+		
+		sinucaRepository.save(sinuca);
+	}
 
 	private Sinuca verificarSinuca(Long sinucaId) {
 		return sinucaRepository.findById(sinucaId)

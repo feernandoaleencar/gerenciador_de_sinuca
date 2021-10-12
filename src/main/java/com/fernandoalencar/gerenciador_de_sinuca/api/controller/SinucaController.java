@@ -129,6 +129,12 @@ public class SinucaController {
 	public void fazerManutencaoSinuca(@PathVariable Long sinucaId) {
 		sinucaService.fazerManutencaoSinuca(sinucaId);
 	}
+	
+	@PutMapping("/{sinucaId}/quebrar")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void quebrarSinuca(@PathVariable Long sinucaId) {
+		sinucaService.quebrarSinuca(sinucaId);
+	}
 
 	private SinucaModel toModel(Sinuca sinuca) {
 		return modelMapper.map(sinuca, SinucaModel.class);
