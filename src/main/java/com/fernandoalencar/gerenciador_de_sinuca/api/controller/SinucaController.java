@@ -96,9 +96,9 @@ public class SinucaController {
 		} else if (!(sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)) && (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
 			throw new NegocioException("Verifique o status da sinuca.");
 		} else if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA) && (sinucaRepository.getById(sinucaId).getDataFechamento() == null)) {
-			throw new NegocioException("Informe a data de fechamente da sinuca.");
+			throw new NegocioException("Informe a data de fechamento da sinuca.");
 		} else {
-			throw new NegocioException("Informe a data de fechamente e o status da sinuca.");
+			throw new NegocioException("Informe a data de fechamento e o status da sinuca.");
 		}	
 
 	}

@@ -2,6 +2,8 @@ package com.fernandoalencar.gerenciador_de_sinuca.domain.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,39 +12,43 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Sinuca {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	private Cliente cliente;
-	
+
 	private OffsetDateTime dataAbertura;
 	private OffsetDateTime dataFechamento;
 
 	@Enumerated(EnumType.STRING)
 	private StatusSinuca status;
-	
+
 	@NotNull
 	private Integer contadorFicha;
-	
+
 	@NotNull
 	private BigDecimal vlrFicha;
-	
+
 	@NotNull
 	private Double porcentagemEmpresa;
-	
+
 	@NotNull
 	private Double porcentagemCliente;
-	
+
 	@NotNull
 	private Integer patrimonio;
-	
+
+	@OneToMany(mappedBy = "sinuca")
+	private List<Movimentacao> movimentacoes = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -121,6 +127,14 @@ public class Sinuca {
 
 	public void setStatus(StatusSinuca status) {
 		this.status = status;
+	}
+
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
+
+	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
+		this.movimentacoes = movimentacoes;
 	}
 
 	@Override
