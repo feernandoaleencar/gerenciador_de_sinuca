@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.EntidadeNaoEncontradaException;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Cliente;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Movimentacao;
@@ -57,7 +58,7 @@ public class SinucaService {
 	
 	public Movimentacao adicionarMovimentacao(Long sinucaId, Integer fichas, Integer descontoFichas, Integer totalFichasCliente) {
 		Sinuca sinuca = sinucaRepository.findById(sinucaId)
-				.orElseThrow(() -> new NegocioException("Sinuca não encontrado"));
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrado"));
 		
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setSinuca(sinuca);
