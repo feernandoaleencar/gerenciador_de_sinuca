@@ -1,2 +1,2 @@
-ALTER TABLE `db_gen_sinuca`.`sinuca` 
+ALTER TABLE `sinuca` 
 ADD COLUMN `fichas_devedor` BIGINT NULL AFTER `status`;
