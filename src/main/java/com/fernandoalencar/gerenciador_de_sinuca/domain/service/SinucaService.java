@@ -1,5 +1,6 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.service;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class SinucaService {
 		sinuca.setStatus(StatusSinuca.DISPONIVEL);
 		sinuca.setDataAbertura(OffsetDateTime.now());
 		sinuca.setFichasDevedor(0);
+		sinuca.setvlrTotalFichasDevedor(0.0);
 
 		return sinucaRepository.save(sinuca);
 	}
@@ -137,11 +139,17 @@ public class SinucaService {
 		movimentacao.setTotalFichasEmpresa(totalEmpresa.intValue());
 		movimentacao.setDiferencaFichas(fichasPendentes.intValue());
 		
+		movimentacao.setVlrTotalFichasDesconto(movimentacao.getDescontoFichas() * movimentacao.getSinuca().getVlrFicha());
+		movimentacao.setVlrTotalFichas(movimentacao.getFichas() * movimentacao.getSinuca().getVlrFicha());
+		movimentacao.setVlrTotalFichasEmpresa(movimentacao.getTotalFichasEmpresa() * movimentacao.getSinuca().getVlrFicha());
+		movimentacao.setVlrTotalFichasCliente(movimentacao.getTotalFichasCliente() * movimentacao.getSinuca().getVlrFicha());
+		
 		Integer totalFinal = movimentacao.getSinuca().getFichasDevedor() + fichasPendentes.intValue();
 		Integer totalFinalFichas = totalFinal + movimentacao.getTotalFinalFichas();
 		
 		movimentacao.getSinuca().setFichasDevedor(totalFinal);
 		movimentacao.setTotalFinalFichas(totalFinalFichas);
+		movimentacao.getSinuca().setvlrTotalFichasDevedor(movimentacao.getSinuca().getFichasDevedor() * movimentacao.getSinuca().getVlrFicha());
 	}
 	
 }

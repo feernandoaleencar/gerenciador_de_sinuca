@@ -18,6 +18,7 @@ public class SinucaModel {
 	private Double porcentagemCliente;
 	private Integer patrimonio;
 	private Integer fichasDevedor;
+	private Double vlrTotalFichasDevedor;
 
 	public Long getId() {
 		return id;
@@ -106,5 +107,15 @@ public class SinucaModel {
 	public void setFichasDevedor(Integer fichasDevedor) {
 		this.fichasDevedor = fichasDevedor;
 	}
+
+	public Double getVlrTotalFichasDevedor() {
+		return vlrTotalFichasDevedor;
+	}
+
+	public void setVlrTotalFichasDevedor(Double vlrTotalFichasDevedor) {
+		this.vlrTotalFichasDevedor = vlrTotalFichasDevedor;
+	}
+	
+	
 	
 }

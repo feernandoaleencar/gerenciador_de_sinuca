@@ -37,7 +37,7 @@ public class Sinuca {
 	private Integer contadorFicha;
 
 	@NotNull
-	private BigDecimal vlrFicha;
+	private Double vlrFicha;
 
 	@NotNull
 	private Double porcentagemEmpresa;
@@ -52,6 +52,9 @@ public class Sinuca {
 	private List<Movimentacao> movimentacoes = new ArrayList<>();
 
 	private Integer fichasDevedor;
+	
+	private Double vlrTotalFichasDevedor;
+	
 
 	public Long getId() {
 		return id;
@@ -93,11 +96,11 @@ public class Sinuca {
 		this.contadorFicha = contadorFicha;
 	}
 
-	public BigDecimal getVlrFicha() {
+	public Double getVlrFicha() {
 		return vlrFicha;
 	}
 
-	public void setVlrFicha(BigDecimal vlrFicha) {
+	public void setVlrFicha(Double vlrFicha) {
 		this.vlrFicha = vlrFicha;
 	}
 
@@ -147,6 +150,14 @@ public class Sinuca {
 
 	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
 		this.movimentacoes = movimentacoes;
+	}
+	
+	public Double getvlrTotalFichasDevedor() {
+		return vlrTotalFichasDevedor;
+	}
+
+	public void setvlrTotalFichasDevedor(Double vlrTotalFichasDevedor) {
+		this.vlrTotalFichasDevedor = vlrTotalFichasDevedor;
 	}
 
 	@Override

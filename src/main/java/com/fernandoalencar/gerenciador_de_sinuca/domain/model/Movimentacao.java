@@ -1,5 +1,6 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.model;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
@@ -26,6 +27,11 @@ public class Movimentacao {
 	private Integer totalFichasCliente;
 	private Integer diferencaFichas;
 	private Integer totalFinalFichas;
+
+	private Double vlrTotalFichas;
+	private Double vlrTotalFichasEmpresa;
+	private Double vlrTotalFichasCliente;
+	private Double vlrTotalFichasDesconto;
 
 	public Long getId() {
 		return id;
@@ -97,6 +103,38 @@ public class Movimentacao {
 
 	public void setTotalFinalFichas(Integer totalFinalFichas) {
 		this.totalFinalFichas = totalFinalFichas;
+	}
+	
+	public Double getVlrTotalFichas() {
+		return vlrTotalFichas;
+	}
+
+	public void setVlrTotalFichas(Double vlrTotalFichas) {
+		this.vlrTotalFichas = vlrTotalFichas;
+	}
+
+	public Double getVlrTotalFichasEmpresa() {
+		return vlrTotalFichasEmpresa;
+	}
+
+	public void setVlrTotalFichasEmpresa(Double vlrTotalFichasEmpresa) {
+		this.vlrTotalFichasEmpresa = vlrTotalFichasEmpresa;
+	}
+
+	public Double getVlrTotalFichasCliente() {
+		return vlrTotalFichasCliente;
+	}
+
+	public void setVlrTotalFichasCliente(Double vlrTotalFichasCliente) {
+		this.vlrTotalFichasCliente = vlrTotalFichasCliente;
+	}
+
+	public Double getVlrTotalFichasDesconto() {
+		return vlrTotalFichasDesconto;
+	}
+
+	public void setVlrTotalFichasDesconto(Double vlrTotalFichasDesconto) {
+		this.vlrTotalFichasDesconto = vlrTotalFichasDesconto;
 	}
 
 	@Override
