@@ -57,8 +57,7 @@ public class SinucaService {
 	}
 	
 	public Movimentacao adicionarMovimentacao(Long sinucaId, Integer fichas, Integer descontoFichas, Integer totalFichasCliente) {
-		Sinuca sinuca = sinucaRepository.findById(sinucaId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrado"));
+		Sinuca sinuca = verficarSinuca(sinucaId);
 		
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setSinuca(sinuca);
@@ -74,6 +73,19 @@ public class SinucaService {
 		calcular(movimentacao);
 		return movimentacaoRepository.save(movimentacao);
 		
+	}
+	
+	public void encerrarSinuca(Long sinucaId){
+		Sinuca sinuca = verficarSinuca(sinucaId);
+		
+		sinuca.finalizar();
+		
+		sinucaRepository.save(sinuca);
+	}
+
+	private Sinuca verficarSinuca(Long sinucaId) {
+		return sinucaRepository.findById(sinucaId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrado"));
 	}
 	
 	private void calcular(Movimentacao movimentacao) {
@@ -98,4 +110,5 @@ public class SinucaService {
 		movimentacao.getSinuca().setFichasDevedor(totalFinal);
 		movimentacao.setTotalFinalFichas(totalFinalFichas);
 	}
+	
 }

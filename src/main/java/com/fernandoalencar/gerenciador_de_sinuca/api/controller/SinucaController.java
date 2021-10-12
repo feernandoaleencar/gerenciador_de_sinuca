@@ -66,6 +66,52 @@ public class SinucaController {
 		return ResponseEntity.notFound().build();
 	}
 
+	// Método excluir cliente
+	@DeleteMapping("/{sinucaId}")
+	public ResponseEntity<Void> remover(@PathVariable Long sinucaId) {
+
+		// verificar se o cliente existe
+		if (!sinucaRepository.existsById(sinucaId)) {
+			return ResponseEntity.notFound().build();
+		}
+
+		// verificar o status e datafechamento
+		if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)
+				&& (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
+			sinucaService.excluir(sinucaId);
+			return ResponseEntity.noContent().build();
+		} else if (!(sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA))
+				&& (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
+			throw new NegocioException("Verifique o status da sinuca.");
+		} else if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)
+				&& (sinucaRepository.getById(sinucaId).getDataFechamento() == null)) {
+			throw new NegocioException("Informe a data de fechamento da sinuca.");
+		} else {
+			throw new NegocioException("Informe a data de fechamento e o status da sinuca.");
+		}
+
+	}
+
+	// Método atualizar sinuca
+	@PutMapping("/{sinucaId}")
+	public ResponseEntity<Sinuca> atualizar(@Valid @PathVariable Long sinucaId, @RequestBody Sinuca sinuca) {
+
+		if (!sinucaRepository.existsById(sinucaId)) {
+			return ResponseEntity.notFound().build();
+		}
+
+		sinuca.setId(sinucaId);
+		sinuca = sinucaService.atualizar(sinuca);
+
+		return ResponseEntity.ok(sinuca);
+	}
+	
+	@PutMapping("/{sinucaId}/finalizacao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void encerrarSinuca(@PathVariable Long sinucaId) {
+		sinucaService.encerrarSinuca(sinucaId);
+	}
+
 	private SinucaModel toModel(Sinuca sinuca) {
 		return modelMapper.map(sinuca, SinucaModel.class);
 	}
@@ -77,45 +123,5 @@ public class SinucaController {
 	private Sinuca toEntity(SinucaInputModel sinucaInputModel) {
 		return modelMapper.map(sinucaInputModel, Sinuca.class);
 	}
-	
-	// Método excluir cliente
 
-	@DeleteMapping("/{sinucaId}")
-	public ResponseEntity<Void> remover(@PathVariable Long sinucaId) {
-		
-		//verificar se o cliente existe
-		if (!sinucaRepository.existsById(sinucaId)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		//verificar o status e datafechamento
-		if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)
-				&& (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
-			sinucaService.excluir(sinucaId);
-			return ResponseEntity.noContent().build();
-		} else if (!(sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA)) && (sinucaRepository.getById(sinucaId).getDataFechamento() != null)) {
-			throw new NegocioException("Verifique o status da sinuca.");
-		} else if (sinucaRepository.getById(sinucaId).getStatus().equals(StatusSinuca.ENCERRADA) && (sinucaRepository.getById(sinucaId).getDataFechamento() == null)) {
-			throw new NegocioException("Informe a data de fechamento da sinuca.");
-		} else {
-			throw new NegocioException("Informe a data de fechamento e o status da sinuca.");
-		}	
-
-	}
-	
-	//Método atualizar sinuca
-	@PutMapping("/{sinucaId}")
-	public ResponseEntity<Sinuca> atualizar(@Valid @PathVariable Long sinucaId, @RequestBody Sinuca sinuca){
-		
-		if (!sinucaRepository.existsById(sinucaId)) {
-			return ResponseEntity.notFound().build(); 
-		}
-		
-		sinuca.setId(sinucaId);
-		sinuca = sinucaService.atualizar(sinuca);
-		
-		return ResponseEntity.ok(sinuca);
-	}
-	
-	
 }

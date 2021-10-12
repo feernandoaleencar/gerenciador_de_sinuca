@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
+
 @Entity
 public class Sinuca {
 
@@ -170,6 +172,25 @@ public class Sinuca {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public boolean podeSerEncerrada() {
+		return StatusSinuca.ALUGADA.equals(getStatus());
+	}
+	
+	public boolean naoPodeSerEncerrada() {
+		return !podeSerEncerrada();
+	}
+
+	public void finalizar() {
+		
+		if (naoPodeSerEncerrada()) {
+			throw new NegocioException("Sinuca não pode ser encerrada, verifique o status!");
+		}
+		
+		setStatus(StatusSinuca.ENCERRADA);
+		setDataFechamento(OffsetDateTime.now());
+		
 	}
 
 }
