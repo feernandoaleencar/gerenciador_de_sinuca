@@ -34,6 +34,7 @@ public class SinucaService {
 		sinuca.setCliente(cliente);
 		sinuca.setStatus(StatusSinuca.DISPONIVEL);
 		sinuca.setDataAbertura(OffsetDateTime.now());
+		sinuca.setFichasDevedor(0);
 
 		return sinucaRepository.save(sinuca);
 	}
@@ -46,6 +47,10 @@ public class SinucaService {
 		
 		Cliente cliente = clienteRepository.findById(sinuca.getCliente().getId())
 				.orElseThrow(() -> new NegocioException("Cliente não encontrado"));
+		
+		if (sinuca.getFichasDevedor() == null) {
+			sinuca.setFichasDevedor(0);
+		}
 		
 		return sinucaRepository.save(sinuca);
 	}
@@ -78,12 +83,18 @@ public class SinucaService {
 		Double totalEmpresa = ((gerarDescontoFichas * movimentacao.getSinuca().getPorcentagemEmpresa()) / 100);
 		Double fichasPendentes = (((gerarDescontoFichas * movimentacao.getSinuca().getPorcentagemCliente()) / 100) - movimentacao.getTotalFichasCliente());
 		
+		if (movimentacao.getTotalFinalFichas() == null ) {
+			movimentacao.setTotalFinalFichas(0);
+		}
+		
 		movimentacao.getSinuca().setContadorFicha(contador);
 		movimentacao.setTotalFichasEmpresa(totalEmpresa.intValue());
 		movimentacao.setDiferencaFichas(fichasPendentes.intValue());
 		
-		Integer totalFinal = movimentacao.getTotalFinalFichas() + fichasPendentes.intValue();
+		Integer totalFinal = movimentacao.getSinuca().getFichasDevedor() + fichasPendentes.intValue();
+		Integer totalFinalFichas = totalFinal + movimentacao.getTotalFinalFichas();
 		
-		movimentacao.setTotalFinalFichas(totalFinal);
+		movimentacao.getSinuca().setFichasDevedor(totalFinal);
+		movimentacao.setTotalFinalFichas(totalFinalFichas);
 	}
 }

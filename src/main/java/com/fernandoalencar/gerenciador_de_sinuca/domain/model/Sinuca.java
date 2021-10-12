@@ -49,6 +49,8 @@ public class Sinuca {
 	@OneToMany(mappedBy = "sinuca")
 	private List<Movimentacao> movimentacoes = new ArrayList<>();
 
+	private Integer fichasDevedor;
+
 	public Long getId() {
 		return id;
 	}
@@ -127,6 +129,14 @@ public class Sinuca {
 
 	public void setStatus(StatusSinuca status) {
 		this.status = status;
+	}
+
+	public Integer getFichasDevedor() {
+		return fichasDevedor;
+	}
+
+	public void setFichasDevedor(Integer fichasDevedor) {
+		this.fichasDevedor = fichasDevedor;
 	}
 
 	public List<Movimentacao> getMovimentacoes() {

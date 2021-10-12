@@ -17,6 +17,7 @@ public class SinucaModel {
 	private Double porcentagemEmpresa;
 	private Double porcentagemCliente;
 	private Integer patrimonio;
+	private Integer fichasDevedor;
 
 	public Long getId() {
 		return id;
@@ -98,4 +99,12 @@ public class SinucaModel {
 		this.cliente = cliente;
 	}
 
+	public Integer getFichasDevedor() {
+		return fichasDevedor;
+	}
+
+	public void setFichasDevedor(Integer fichasDevedor) {
+		this.fichasDevedor = fichasDevedor;
+	}
+	
 }
