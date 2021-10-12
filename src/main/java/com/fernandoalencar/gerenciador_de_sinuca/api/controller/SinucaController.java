@@ -111,6 +111,12 @@ public class SinucaController {
 	public void encerrarSinuca(@PathVariable Long sinucaId) {
 		sinucaService.encerrarSinuca(sinucaId);
 	}
+	
+	@PutMapping("/{sinucaId}/alugar")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void alugarSinuca(@PathVariable Long sinucaId) {
+		sinucaService.alugarSinuca(sinucaId);
+	}
 
 	private SinucaModel toModel(Sinuca sinuca) {
 		return modelMapper.map(sinuca, SinucaModel.class);

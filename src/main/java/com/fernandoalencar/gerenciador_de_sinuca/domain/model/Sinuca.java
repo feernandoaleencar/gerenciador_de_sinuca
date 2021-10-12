@@ -173,24 +173,42 @@ public class Sinuca {
 			return false;
 		return true;
 	}
-	
+
 	public boolean podeSerEncerrada() {
 		return StatusSinuca.ALUGADA.equals(getStatus());
 	}
-	
+
 	public boolean naoPodeSerEncerrada() {
 		return !podeSerEncerrada();
 	}
 
 	public void finalizar() {
-		
+
 		if (naoPodeSerEncerrada()) {
 			throw new NegocioException("Sinuca não pode ser encerrada, verifique o status!");
 		}
-		
+
 		setStatus(StatusSinuca.ENCERRADA);
 		setDataFechamento(OffsetDateTime.now());
+
+	}
+
+	public boolean podeSerAlugada() {
+		return StatusSinuca.DISPONIVEL.equals(getStatus());
+	}
+
+	public boolean naoPodeSerAlugada() {
+		return !podeSerAlugada();
+	}
+
+	public void alugar() {
 		
+		if (naoPodeSerAlugada()) {
+			throw new NegocioException("Sinuca não pode ser alugada, verifique o status!");
+		}
+		
+		setStatus(StatusSinuca.ALUGADA);
+
 	}
 
 }
