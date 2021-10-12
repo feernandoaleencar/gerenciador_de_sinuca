@@ -106,6 +106,12 @@ public class SinucaController {
 		return ResponseEntity.ok(sinuca);
 	}
 	
+	@PutMapping("/{sinucaId}/ficarDisponivel")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void ficarDisponivel(@PathVariable Long sinucaId) {
+		sinucaService.ficarDisponivel(sinucaId);
+	}
+	
 	@PutMapping("/{sinucaId}/finalizacao")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void encerrarSinuca(@PathVariable Long sinucaId) {
@@ -116,6 +122,12 @@ public class SinucaController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void alugarSinuca(@PathVariable Long sinucaId) {
 		sinucaService.alugarSinuca(sinucaId);
+	}
+	
+	@PutMapping("/{sinucaId}/fazerManutencao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void fazerManutencaoSinuca(@PathVariable Long sinucaId) {
+		sinucaService.fazerManutencaoSinuca(sinucaId);
 	}
 
 	private SinucaModel toModel(Sinuca sinuca) {

@@ -57,7 +57,7 @@ public class SinucaService {
 	}
 	
 	public Movimentacao adicionarMovimentacao(Long sinucaId, Integer fichas, Integer descontoFichas, Integer totalFichasCliente) {
-		Sinuca sinuca = verficarSinuca(sinucaId);
+		Sinuca sinuca = verificarSinuca(sinucaId);
 		
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setSinuca(sinuca);
@@ -75,8 +75,16 @@ public class SinucaService {
 		
 	}
 	
+	public void ficarDisponivel(Long sinucaId) {
+		Sinuca sinuca = verificarSinuca(sinucaId);
+		
+		sinuca.ficarDisponivel();
+		
+		sinucaRepository.save(sinuca);
+	}
+	
 	public void encerrarSinuca(Long sinucaId){
-		Sinuca sinuca = verficarSinuca(sinucaId);
+		Sinuca sinuca = verificarSinuca(sinucaId);
 		
 		sinuca.finalizar();
 		
@@ -84,14 +92,23 @@ public class SinucaService {
 	}
 	
 	public void alugarSinuca(Long sinucaId) {
-		Sinuca sinuca = verficarSinuca(sinucaId);
+		Sinuca sinuca = verificarSinuca(sinucaId);
 		
 		sinuca.alugar();
 		
 		sinucaRepository.save(sinuca);
 	}
+	
+	public void fazerManutencaoSinuca(Long sinucaId) {
+		
+		Sinuca sinuca = verificarSinuca(sinucaId);
+		
+		sinuca.fazerManutencao();
+		
+		sinucaRepository.save(sinuca);
+	}
 
-	private Sinuca verficarSinuca(Long sinucaId) {
+	private Sinuca verificarSinuca(Long sinucaId) {
 		return sinucaRepository.findById(sinucaId)
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrado"));
 	}
