@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public class MovimentacaoModel {
-
+	
 	private Long id;
 	private OffsetDateTime dataMovimentacao;
 	private Integer fichas;

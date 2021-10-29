@@ -6,16 +6,26 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class SinucaFilter {
 
+	private Long id;
+
 	private Integer patrimonio;
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private OffsetDateTime dataAberturaDe;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private OffsetDateTime dataAberturaAte;
 
 	public Integer getPatrimonio() {
 		return patrimonio;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setPatrimonio(Integer patrimonio) {

@@ -38,7 +38,7 @@ public class MovimentacaoController {
 	private SinucaRepository sinucaRepository;
 	
 	@GetMapping
-	public List<MovimentacaoModel> pesquisar(@PathVariable Long sinucaId){
+	public List<MovimentacaoModel> listar(@PathVariable Long sinucaId){
 		
 		Sinuca sinuca = sinucaRepository.findById(sinucaId).orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrada"));
 		

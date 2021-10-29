@@ -17,7 +17,7 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca_;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.filter.SinucaFilter;
 
-public class SinucaRespositoryImpl implements SinucaRepositoryQuery {
+public class SinucaRepositoryImpl implements SinucaRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -43,7 +43,7 @@ public class SinucaRespositoryImpl implements SinucaRepositoryQuery {
 
 		if (!ObjectUtils.isEmpty(sinucaFilter.getPatrimonio())) {
 			predicates.add(builder.equal(
-					builder.toInteger(root.get(Sinuca_.patrimonio)), "%" + sinucaFilter.getPatrimonio() + "%"));
+					builder.toInteger(root.get(Sinuca_.patrimonio)), sinucaFilter.getPatrimonio()));
 		}
 
 		if (!ObjectUtils.isEmpty(sinucaFilter.getDataAberturaDe())) {

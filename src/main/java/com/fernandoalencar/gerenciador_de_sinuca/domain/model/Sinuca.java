@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
 
 @Entity
@@ -27,6 +31,7 @@ public class Sinuca {
 	@ManyToOne
 	private Cliente cliente;
 
+	@JsonFormat(pattern =  "dd-MM-yyyy")
 	private OffsetDateTime dataAbertura;
 	private OffsetDateTime dataFechamento;
 
@@ -47,8 +52,9 @@ public class Sinuca {
 
 	@NotNull
 	private Integer patrimonio;
-
+	
 	@OneToMany(mappedBy = "sinuca")
+	@JsonIgnore
 	private List<Movimentacao> movimentacoes = new ArrayList<>();
 
 	private Integer fichasDevedor;

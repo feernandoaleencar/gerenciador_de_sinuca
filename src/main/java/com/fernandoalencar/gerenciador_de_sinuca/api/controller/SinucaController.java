@@ -50,9 +50,14 @@ public class SinucaController {
 		return toModel(sinucaService.criar(sinuca));
 	}
 
+	/*
+	 * @GetMapping public List<SinucaModel> listar() { return
+	 * toCollectionModel(sinucaRepository.findAll()); }
+	 */
+
 	@GetMapping
-	public List<SinucaModel> pesquisar(SinucaFilter sinucaFilter) {
-		return toCollectionModel(sinucaRepository.filtrar(sinucaFilter));
+	public List<Sinuca> pesquisar(SinucaFilter sinucaFilter) {
+		return sinucaRepository.filtrar(sinucaFilter);
 	}
 
 	@GetMapping("/{sinucaId}")
@@ -106,31 +111,31 @@ public class SinucaController {
 
 		return ResponseEntity.ok(sinuca);
 	}
-	
+
 	@PutMapping("/{sinucaId}/ficarDisponivel")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void ficarDisponivel(@PathVariable Long sinucaId) {
 		sinucaService.ficarDisponivel(sinucaId);
 	}
-	
+
 	@PutMapping("/{sinucaId}/finalizacao")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void encerrarSinuca(@PathVariable Long sinucaId) {
 		sinucaService.encerrarSinuca(sinucaId);
 	}
-	
+
 	@PutMapping("/{sinucaId}/alugar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void alugarSinuca(@PathVariable Long sinucaId) {
 		sinucaService.alugarSinuca(sinucaId);
 	}
-	
+
 	@PutMapping("/{sinucaId}/fazerManutencao")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void fazerManutencaoSinuca(@PathVariable Long sinucaId) {
 		sinucaService.fazerManutencaoSinuca(sinucaId);
 	}
-	
+
 	@PutMapping("/{sinucaId}/quebrar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void quebrarSinuca(@PathVariable Long sinucaId) {
