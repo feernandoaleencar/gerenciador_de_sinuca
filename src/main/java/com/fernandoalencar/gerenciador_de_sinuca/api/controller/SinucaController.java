@@ -27,6 +27,7 @@ import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Cliente;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.filter.SinucaFilter;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.service.SinucaService;
 
 @RestController
@@ -50,8 +51,8 @@ public class SinucaController {
 	}
 
 	@GetMapping
-	public List<SinucaModel> listar() {
-		return toCollectionModel(sinucaRepository.findAll());
+	public List<SinucaModel> pesquisar(SinucaFilter sinucaFilter) {
+		return toCollectionModel(sinucaRepository.filtrar(sinucaFilter));
 	}
 
 	@GetMapping("/{sinucaId}")
