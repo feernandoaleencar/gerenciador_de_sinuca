@@ -1,5 +1,6 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.model;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -13,8 +14,8 @@ public abstract class Sinuca_ {
 
 	public static volatile SingularAttribute<Sinuca, Long> id;
 	public static volatile SingularAttribute<Sinuca, Cliente> cliente;
-	public static volatile SingularAttribute<Sinuca, OffsetDateTime> dataAbertura;
-	public static volatile SingularAttribute<Sinuca, OffsetDateTime> dataFechamento;
+	public static volatile SingularAttribute<Sinuca, LocalDate> dataAbertura;
+	public static volatile SingularAttribute<Sinuca, LocalDate> dataFechamento;
 	public static volatile SingularAttribute<Sinuca, StatusSinuca> status;
 	public static volatile SingularAttribute<Sinuca, Long> contadorFicha;
 	public static volatile SingularAttribute<Sinuca, Double> vlrFicha;

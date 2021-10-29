@@ -46,7 +46,7 @@ public class SinucaRepositoryImpl implements SinucaRepositoryQuery {
 					builder.toInteger(root.get(Sinuca_.patrimonio)), sinucaFilter.getPatrimonio()));
 		}
 
-		if (!ObjectUtils.isEmpty(sinucaFilter.getDataAberturaDe())) {
+		if (sinucaFilter.getDataAberturaDe() != null) {
 			predicates.add(
 					builder.greaterThanOrEqualTo(root.get(Sinuca_.dataAbertura), sinucaFilter.getDataAberturaDe()));
 		}

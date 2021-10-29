@@ -1,10 +1,12 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -31,9 +33,10 @@ public class Sinuca {
 	@ManyToOne
 	private Cliente cliente;
 
+	@Column(name = "data_abertura")
 	@JsonFormat(pattern =  "dd-MM-yyyy")
-	private OffsetDateTime dataAbertura;
-	private OffsetDateTime dataFechamento;
+	private LocalDate dataAbertura;
+	private LocalDate dataFechamento;
 
 	@Enumerated(EnumType.STRING)
 	private StatusSinuca status;
@@ -78,19 +81,19 @@ public class Sinuca {
 		this.cliente = cliente;
 	}
 
-	public OffsetDateTime getDataAbertura() {
+	public LocalDate getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(OffsetDateTime dataAbertura) {
+	public void setDataAbertura(LocalDate dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public OffsetDateTime getDataFechamento() {
+	public LocalDate getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(OffsetDateTime dataFechamento) {
+	public void setDataFechamento(LocalDate dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -224,7 +227,7 @@ public class Sinuca {
 		}
 
 		setStatus(StatusSinuca.ENCERRADA);
-		setDataFechamento(OffsetDateTime.now());
+		setDataFechamento(LocalDate.now());
 
 	}
 

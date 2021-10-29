@@ -1,5 +1,6 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.repository.filter;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,10 +12,10 @@ public class SinucaFilter {
 	private Integer patrimonio;
 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private OffsetDateTime dataAberturaDe;
+	private LocalDate dataAberturaDe;
 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private OffsetDateTime dataAberturaAte;
+	private LocalDate dataAberturaAte;
 
 	public Integer getPatrimonio() {
 		return patrimonio;
@@ -32,19 +33,19 @@ public class SinucaFilter {
 		this.patrimonio = patrimonio;
 	}
 
-	public OffsetDateTime getDataAberturaDe() {
+	public LocalDate getDataAberturaDe() {
 		return dataAberturaDe;
 	}
 
-	public void setDataAberturaDe(OffsetDateTime dataAberturaDe) {
+	public void setDataAberturaDe(LocalDate dataAberturaDe) {
 		this.dataAberturaDe = dataAberturaDe;
 	}
 
-	public OffsetDateTime getDataAberturaAte() {
+	public LocalDate getDataAberturaAte() {
 		return dataAberturaAte;
 	}
 
-	public void setDataAberturaAte(OffsetDateTime dataAberturaAte) {
+	public void setDataAberturaAte(LocalDate dataAberturaAte) {
 		this.dataAberturaAte = dataAberturaAte;
 	}
 
