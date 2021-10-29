@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.util.ObjectUtils;
 
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
+import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca_;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.filter.SinucaFilter;
 
 public class SinucaRespositoryImpl implements SinucaRepositoryQuery {
@@ -42,15 +43,17 @@ public class SinucaRespositoryImpl implements SinucaRepositoryQuery {
 
 		if (!ObjectUtils.isEmpty(sinucaFilter.getPatrimonio())) {
 			predicates.add(builder.equal(
-					builder.toInteger(root.get("patrimonio")), "%" + sinucaFilter.getPatrimonio() + "%"));
+					builder.toInteger(root.get(Sinuca_.patrimonio)), "%" + sinucaFilter.getPatrimonio() + "%"));
 		}
 
 		if (!ObjectUtils.isEmpty(sinucaFilter.getDataAberturaDe())) {
-
+			predicates.add(
+					builder.greaterThanOrEqualTo(root.get(Sinuca_.dataAbertura), sinucaFilter.getDataAberturaDe()));
 		}
 
 		if (!ObjectUtils.isEmpty(sinucaFilter.getDataAberturaAte())) {
-
+			predicates.add(
+					builder.lessThanOrEqualTo(root.get(Sinuca_.dataAbertura), sinucaFilter.getDataAberturaAte()));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
