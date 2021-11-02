@@ -1,8 +1,7 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.service;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class SinucaService {
 
 		sinuca.setCliente(cliente);
 		sinuca.setStatus(StatusSinuca.DISPONIVEL);
-		sinuca.setDataAbertura(OffsetDateTime.now());
+		sinuca.setDataAbertura(LocalDate.now());
 		sinuca.setFichasDevedor(0);
 		sinuca.setvlrTotalFichasDevedor(0.0);
 

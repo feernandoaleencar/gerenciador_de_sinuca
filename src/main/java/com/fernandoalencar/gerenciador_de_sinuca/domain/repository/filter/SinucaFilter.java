@@ -5,6 +5,8 @@ import java.time.OffsetDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
+
 public class SinucaFilter {
 
 	private Long id;
@@ -16,6 +18,8 @@ public class SinucaFilter {
 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataAberturaAte;
+	
+	private String status;
 
 	public Integer getPatrimonio() {
 		return patrimonio;
@@ -47,6 +51,14 @@ public class SinucaFilter {
 
 	public void setDataAberturaAte(LocalDate dataAberturaAte) {
 		this.dataAberturaAte = dataAberturaAte;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

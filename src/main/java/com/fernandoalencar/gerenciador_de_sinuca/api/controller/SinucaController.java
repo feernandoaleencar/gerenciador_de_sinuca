@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,14 +52,9 @@ public class SinucaController {
 		return toModel(sinucaService.criar(sinuca));
 	}
 
-	/*
-	 * @GetMapping public List<SinucaModel> listar() { return
-	 * toCollectionModel(sinucaRepository.findAll()); }
-	 */
-
 	@GetMapping
-	public List<Sinuca> pesquisar(SinucaFilter sinucaFilter) {
-		return sinucaRepository.filtrar(sinucaFilter);
+	public Page<Sinuca> pesquisar(SinucaFilter sinucaFilter, Pageable pageable) {
+		return sinucaRepository.filtrar(sinucaFilter, pageable);
 	}
 
 	@GetMapping("/{sinucaId}")
