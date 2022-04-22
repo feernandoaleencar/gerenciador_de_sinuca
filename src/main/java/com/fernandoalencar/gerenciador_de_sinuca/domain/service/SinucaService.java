@@ -173,7 +173,7 @@ public class SinucaService {
 	}
 
 	//Método para deixar sinuca com Status ALUGADA
-	public void alugar(Sinuca sinuca) {
+	private void alugar(Sinuca sinuca) {
 
 		if (naoPodeSerAlugada(sinuca)) {
 			throw new NegocioException("Sinuca não pode ser alugada, verifique o status!");
@@ -183,11 +183,11 @@ public class SinucaService {
 
 	}
 
-	public boolean naoPodeSerAlugada(Sinuca sinuca) {
+	private boolean naoPodeSerAlugada(Sinuca sinuca) {
 		return !podeSerAlugada(sinuca);
 	}
 
-	public boolean podeSerAlugada(Sinuca sinuca) {
+	private boolean podeSerAlugada(Sinuca sinuca) {
 		return StatusSinuca.DISPONIVEL.equals(sinuca.getStatus());
 	}
 
