@@ -79,8 +79,16 @@ public class SinucaService {
 	public void ficarDisponivel(Long sinucaId) {
 		Sinuca sinuca = verificarSinuca(sinucaId);
 		
-		sinuca.ficarDisponivel();
+		ficarDisponivel(sinuca);
 		
+		sinucaRepository.save(sinuca);
+	}
+
+	public void alugarSinuca(Long sinucaId) {
+		Sinuca sinuca = verificarSinuca(sinucaId);
+
+		alugar(sinuca);
+
 		sinucaRepository.save(sinuca);
 	}
 	
@@ -88,14 +96,6 @@ public class SinucaService {
 		Sinuca sinuca = verificarSinuca(sinucaId);
 		
 		sinuca.finalizar();
-		
-		sinucaRepository.save(sinuca);
-	}
-	
-	public void alugarSinuca(Long sinucaId) {
-		Sinuca sinuca = verificarSinuca(sinucaId);
-		
-		sinuca.alugar();
 		
 		sinucaRepository.save(sinuca);
 	}
@@ -118,8 +118,10 @@ public class SinucaService {
 	}
 
 	private Sinuca verificarSinuca(Long sinucaId) {
-		return sinucaRepository.findById(sinucaId)
+		Sinuca sinuca = sinucaRepository.findById(sinucaId)
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("Sinuca não encontrado"));
+
+		return sinuca;
 	}
 	
 	private void calcular(Movimentacao movimentacao) {
@@ -150,5 +152,47 @@ public class SinucaService {
 		movimentacao.setTotalFinalFichas(totalFinalFichas);
 		movimentacao.getSinuca().setvlrTotalFichasDevedor(movimentacao.getSinuca().getFichasDevedor() * movimentacao.getSinuca().getVlrFicha());
 	}
+
+	//Método para deixar sinuca com Status DISPONÍVEL
+	private void ficarDisponivel(Sinuca sinuca) {
+
+		if (naoPodeFicarDisponivel(sinuca)) {
+			throw new NegocioException("Sinuca não pode ficar disponível, verifique o status!");
+		}
+
+		sinuca.setStatus(StatusSinuca.DISPONIVEL);
+
+	}
+
+	private boolean naoPodeFicarDisponivel(Sinuca sinuca) {
+		return !podeFicarDisponivel(sinuca);
+	}
+
+	private boolean podeFicarDisponivel(Sinuca sinuca) {
+		return StatusSinuca.MANUTENCAO.equals(sinuca.getStatus()) || StatusSinuca.QUEBRADA.equals(sinuca.getStatus());
+	}
+
+	//Método para deixar sinuca com Status ALUGADA
+	public void alugar(Sinuca sinuca) {
+
+		if (naoPodeSerAlugada(sinuca)) {
+			throw new NegocioException("Sinuca não pode ser alugada, verifique o status!");
+		}
+
+		sinuca.setStatus(StatusSinuca.ALUGADA);
+
+	}
+
+	public boolean naoPodeSerAlugada(Sinuca sinuca) {
+		return !podeSerAlugada(sinuca);
+	}
+
+	public boolean podeSerAlugada(Sinuca sinuca) {
+		return StatusSinuca.DISPONIVEL.equals(sinuca.getStatus());
+	}
+
+
+
+
 	
 }
