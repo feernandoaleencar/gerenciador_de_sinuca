@@ -1,6 +1,7 @@
 package com.fernandoalencar.gerenciador_de_sinuca.api.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
@@ -9,8 +10,8 @@ public class SinucaModel {
 
 	private Long id;
 	private ClienteResumoModal cliente;
-	private OffsetDateTime dataAbertura;
-	private OffsetDateTime dataFechamento;
+	private LocalDate dataAbertura;
+	private LocalDate dataFechamento;
 	private StatusSinuca status;
 	private Integer contadorFicha;
 	private BigDecimal vlrFicha;
@@ -28,19 +29,19 @@ public class SinucaModel {
 		this.id = id;
 	}
 
-	public OffsetDateTime getDataAbertura() {
+	public LocalDate getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(OffsetDateTime dataAbertura) {
+	public void setDataAbertura(LocalDate dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public OffsetDateTime getDataFechamento() {
+	public LocalDate getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(OffsetDateTime dataFechamento) {
+	public void setDataFechamento(LocalDate dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -115,7 +116,5 @@ public class SinucaModel {
 	public void setVlrTotalFichasDevedor(Double vlrTotalFichasDevedor) {
 		this.vlrTotalFichasDevedor = vlrTotalFichasDevedor;
 	}
-	
-	
-	
+
 }
