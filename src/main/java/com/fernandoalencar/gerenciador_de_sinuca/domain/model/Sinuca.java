@@ -213,38 +213,6 @@ public class Sinuca {
 
 	}
 	
-	public boolean podeFazerManutencao() {
-		return StatusSinuca.ALUGADA.equals(getStatus()) || StatusSinuca.QUEBRADA.equals(getStatus());
-	}
-
-	public boolean naoPodeFazerManutencao() {
-		return !podeFazerManutencao();
-	}
-
-	public void fazerManutencao() {
-		
-		if (naoPodeFazerManutencao()) {
-			throw new NegocioException("Sinuca não pode sofrer manutencao, verifique o status!");
-		}
-		
-		setStatus(StatusSinuca.MANUTENCAO);
-	}
-	
-	public boolean podeQuebrar() {
-		return StatusSinuca.ALUGADA.equals(getStatus());
-	}
-
-	public boolean naoPodeQuebrar() {
-		return !podeQuebrar();
-	}
-	
-	public void quebrarSinuca() {
-		if (naoPodeFazerManutencao()) {
-			throw new NegocioException("Sinuca não pode ser quebrada, verifique o status!");
-		}
-		
-		setStatus(StatusSinuca.QUEBRADA);
-	}
 
 	
 

@@ -91,6 +91,15 @@ public class SinucaService {
 
 		sinucaRepository.save(sinuca);
 	}
+
+	public void fazerManutencaoSinuca(Long sinucaId) {
+
+		Sinuca sinuca = verificarSinuca(sinucaId);
+
+		fazerManutencao(sinuca);
+
+		sinucaRepository.save(sinuca);
+	}
 	
 	public void encerrarSinuca(Long sinucaId){
 		Sinuca sinuca = verificarSinuca(sinucaId);
@@ -100,19 +109,12 @@ public class SinucaService {
 		sinucaRepository.save(sinuca);
 	}
 	
-	public void fazerManutencaoSinuca(Long sinucaId) {
-		
-		Sinuca sinuca = verificarSinuca(sinucaId);
-		
-		sinuca.fazerManutencao();
-		
-		sinucaRepository.save(sinuca);
-	}
+
 	
 	public void quebrarSinuca(Long sinucaId) {
 		Sinuca sinuca = verificarSinuca(sinucaId);
 		
-		sinuca.quebrarSinuca();
+		quebrarSinuca(sinuca);
 		
 		sinucaRepository.save(sinuca);
 	}
@@ -191,8 +193,42 @@ public class SinucaService {
 		return StatusSinuca.DISPONIVEL.equals(sinuca.getStatus());
 	}
 
+	//Método para deixar sinuca com Status ALUGADA
+	public void fazerManutencao(Sinuca sinuca) {
+
+		if (naoPodeFazerManutencao(sinuca)) {
+			throw new NegocioException("Sinuca não pode sofrer manutencao, verifique o status!");
+		}
+
+		sinuca.setStatus(StatusSinuca.MANUTENCAO);
+	}
+
+	public boolean podeFazerManutencao(Sinuca sinuca) {
+		return StatusSinuca.ALUGADA.equals(sinuca.getStatus()) || StatusSinuca.QUEBRADA.equals(sinuca.getStatus());
+	}
+
+	public boolean naoPodeFazerManutencao(Sinuca sinuca) {
+		return !podeFazerManutencao(sinuca);
+	}
+
+	//Método para deixar sinuca com Status Alugada
+	public void quebrarSinuca(Sinuca sinuca) {
+		if (naoPodeQuebrar(sinuca)) {
+			throw new NegocioException("Sinuca não pode ser quebrada, verifique o status!");
+		}
+
+		sinuca.setStatus(StatusSinuca.QUEBRADA);
+	}
+
+	public boolean podeQuebrar(Sinuca sinuca) {
+		return StatusSinuca.ALUGADA.equals(sinuca.getStatus());
+	}
+
+	public boolean naoPodeQuebrar(Sinuca sinuca) {
+		return !podeQuebrar(sinuca);
+	}
 
 
 
-	
+
 }
