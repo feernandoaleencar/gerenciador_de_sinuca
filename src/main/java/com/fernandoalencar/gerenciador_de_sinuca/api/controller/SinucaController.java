@@ -22,10 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaInputModel;
-import com.fernandoalencar.gerenciador_de_sinuca.api.model.SinucaModel;
+import com.fernandoalencar.gerenciador_de_sinuca.api.dto.SinucaInputModel;
+import com.fernandoalencar.gerenciador_de_sinuca.api.dto.SinucaModel;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.NegocioException;
-import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Cliente;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.repository.SinucaRepository;

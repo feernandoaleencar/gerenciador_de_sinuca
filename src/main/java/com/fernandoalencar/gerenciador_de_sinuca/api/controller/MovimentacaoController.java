@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fernandoalencar.gerenciador_de_sinuca.api.model.MovimentacaoInputModel;
-import com.fernandoalencar.gerenciador_de_sinuca.api.model.MovimentacaoModel;
+import com.fernandoalencar.gerenciador_de_sinuca.api.dto.MovimentacaoInputModel;
+import com.fernandoalencar.gerenciador_de_sinuca.api.dto.MovimentacaoModel;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.exception.EntidadeNaoEncontradaException;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Movimentacao;
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Sinuca;

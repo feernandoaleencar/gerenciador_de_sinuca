@@ -1,8 +1,7 @@
-package com.fernandoalencar.gerenciador_de_sinuca.api.model;
+package com.fernandoalencar.gerenciador_de_sinuca.api.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 import com.fernandoalencar.gerenciador_de_sinuca.domain.model.StatusSinuca;
 

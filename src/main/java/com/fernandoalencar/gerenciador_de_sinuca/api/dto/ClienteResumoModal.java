@@ -1,12 +1,13 @@
-package com.fernandoalencar.gerenciador_de_sinuca.api.model;
+package com.fernandoalencar.gerenciador_de_sinuca.api.dto;
+
+import com.fernandoalencar.gerenciador_de_sinuca.domain.model.Endereco;
 
 public class ClienteResumoModal {
 
 	private Long id;
 	private String nome;
 	private String cpf;
-	private String telefone;
-	private String endereco;
+	private Endereco endereco;
 
 	public Long getId() {
 		return id;
@@ -32,19 +33,11 @@ public class ClienteResumoModal {
 		this.cpf = cpf;
 	}
 
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 }

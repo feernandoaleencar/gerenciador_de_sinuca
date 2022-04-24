@@ -1,6 +1,5 @@
-package com.fernandoalencar.gerenciador_de_sinuca.api.model;
+package com.fernandoalencar.gerenciador_de_sinuca.api.dto;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public class MovimentacaoModel {
