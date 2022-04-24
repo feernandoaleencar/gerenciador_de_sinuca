@@ -194,26 +194,4 @@ public class Sinuca {
 		return true;
 	}
 
-	public boolean podeSerEncerrada() {
-		return StatusSinuca.ALUGADA.equals(getStatus());
-	}
-
-	public boolean naoPodeSerEncerrada() {
-		return !podeSerEncerrada();
-	}
-
-	public void finalizar() {
-
-		if (naoPodeSerEncerrada()) {
-			throw new NegocioException("Sinuca não pode ser encerrada, verifique o status!");
-		}
-
-		setStatus(StatusSinuca.ENCERRADA);
-		setDataFechamento(LocalDate.now());
-
-	}
-	
-
-	
-
 }

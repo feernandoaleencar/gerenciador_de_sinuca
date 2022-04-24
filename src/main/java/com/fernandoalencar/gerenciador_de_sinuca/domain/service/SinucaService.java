@@ -100,21 +100,19 @@ public class SinucaService {
 
 		sinucaRepository.save(sinuca);
 	}
+
+	public void quebrarSinuca(Long sinucaId) {
+		Sinuca sinuca = verificarSinuca(sinucaId);
+
+		quebrarSinuca(sinuca);
+
+		sinucaRepository.save(sinuca);
+	}
 	
 	public void encerrarSinuca(Long sinucaId){
 		Sinuca sinuca = verificarSinuca(sinucaId);
 		
-		sinuca.finalizar();
-		
-		sinucaRepository.save(sinuca);
-	}
-	
-
-	
-	public void quebrarSinuca(Long sinucaId) {
-		Sinuca sinuca = verificarSinuca(sinucaId);
-		
-		quebrarSinuca(sinuca);
+		finalizar(sinuca);
 		
 		sinucaRepository.save(sinuca);
 	}
@@ -185,15 +183,15 @@ public class SinucaService {
 
 	}
 
-	private boolean naoPodeSerAlugada(Sinuca sinuca) {
-		return !podeSerAlugada(sinuca);
-	}
-
 	private boolean podeSerAlugada(Sinuca sinuca) {
 		return StatusSinuca.DISPONIVEL.equals(sinuca.getStatus());
 	}
 
-	//Método para deixar sinuca com Status ALUGADA
+	private boolean naoPodeSerAlugada(Sinuca sinuca) {
+		return !podeSerAlugada(sinuca);
+	}
+
+	//Método para deixar sinuca com Status MANUTENÇÃO
 	public void fazerManutencao(Sinuca sinuca) {
 
 		if (naoPodeFazerManutencao(sinuca)) {
@@ -203,15 +201,15 @@ public class SinucaService {
 		sinuca.setStatus(StatusSinuca.MANUTENCAO);
 	}
 
-	public boolean podeFazerManutencao(Sinuca sinuca) {
-		return StatusSinuca.ALUGADA.equals(sinuca.getStatus()) || StatusSinuca.QUEBRADA.equals(sinuca.getStatus());
-	}
-
 	public boolean naoPodeFazerManutencao(Sinuca sinuca) {
 		return !podeFazerManutencao(sinuca);
 	}
 
-	//Método para deixar sinuca com Status Alugada
+	public boolean podeFazerManutencao(Sinuca sinuca) {
+		return StatusSinuca.ALUGADA.equals(sinuca.getStatus()) || StatusSinuca.QUEBRADA.equals(sinuca.getStatus());
+	}
+
+	//Método para deixar sinuca com Status QUEBRADA
 	public void quebrarSinuca(Sinuca sinuca) {
 		if (naoPodeQuebrar(sinuca)) {
 			throw new NegocioException("Sinuca não pode ser quebrada, verifique o status!");
@@ -220,15 +218,32 @@ public class SinucaService {
 		sinuca.setStatus(StatusSinuca.QUEBRADA);
 	}
 
-	public boolean podeQuebrar(Sinuca sinuca) {
-		return StatusSinuca.ALUGADA.equals(sinuca.getStatus());
-	}
-
 	public boolean naoPodeQuebrar(Sinuca sinuca) {
 		return !podeQuebrar(sinuca);
 	}
 
+	public boolean podeQuebrar(Sinuca sinuca) {
+		return StatusSinuca.ALUGADA.equals(sinuca.getStatus());
+	}
 
+	//Método para deixar sinuca com Status ENCERRADA
+	public void finalizar(Sinuca sinuca) {
 
+		if (naoPodeSerEncerrada(sinuca)) {
+			throw new NegocioException("Sinuca não pode ser encerrada, verifique o status!");
+		}
+
+		sinuca.setStatus(StatusSinuca.ENCERRADA);
+		sinuca.setDataFechamento(LocalDate.now());
+
+	}
+
+	public boolean naoPodeSerEncerrada(Sinuca sinuca) {
+		return !podeSerEncerrada(sinuca);
+	}
+
+	public boolean podeSerEncerrada(Sinuca sinuca) {
+		return StatusSinuca.ALUGADA.equals(sinuca.getStatus());
+	}
 
 }
