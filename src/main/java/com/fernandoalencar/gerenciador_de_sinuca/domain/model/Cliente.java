@@ -1,14 +1,12 @@
 package com.fernandoalencar.gerenciador_de_sinuca.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name = "cliente")
 public class Cliente {
 
 	// Atributos da classe cliente
@@ -29,17 +27,8 @@ public class Cliente {
 	@Size(max = 255)
 	private String email;
 
-	@NotBlank
-	@Size(max = 20)
-	private String telefone;
-
-	@NotBlank
-	@Size(max = 60)
-	private String endereco;
-
-	@NotBlank
-	@Size(max = 20)
-	private String cidade;
+	@Embedded
+	private Endereco endereco;
 
 	// Métodos Getters e Setters
 	public Long getId() {
@@ -74,28 +63,12 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 
 	// Método Equals e Hashcode

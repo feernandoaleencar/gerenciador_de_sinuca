@@ -12,8 +12,6 @@ public abstract class Cliente_ {
 	public static volatile SingularAttribute<Cliente, String> nome;
 	public static volatile SingularAttribute<Cliente, String> cpf;
 	public static volatile SingularAttribute<Cliente, String> email;
-	public static volatile SingularAttribute<Cliente, String> telefone;
-	public static volatile SingularAttribute<Cliente, String> endereco;
-	public static volatile SingularAttribute<Cliente, String> cidade;
+	public static volatile SingularAttribute<Cliente, Endereco> endereco;
 
 }

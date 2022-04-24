@@ -7,7 +7,6 @@ public class ClienteResumoModal {
 	private String cpf;
 	private String telefone;
 	private String endereco;
-	private String cidade;
 
 	public Long getId() {
 		return id;
@@ -47,13 +46,5 @@ public class ClienteResumoModal {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 }
