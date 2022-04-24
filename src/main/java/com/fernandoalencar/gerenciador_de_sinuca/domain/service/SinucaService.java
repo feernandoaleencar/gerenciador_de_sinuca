@@ -59,6 +59,10 @@ public class SinucaService {
 	
 	public Movimentacao adicionarMovimentacao(Long sinucaId, Integer fichas, Integer descontoFichas, Integer totalFichasCliente) {
 		Sinuca sinuca = verificarSinuca(sinucaId);
+
+		if (!sinuca.getStatus().equals(StatusSinuca.ALUGADA)) {
+			throw new NegocioException("Movimentação não pode ser adicionada, verifique o status!");
+		}
 		
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setSinuca(sinuca);
