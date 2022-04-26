@@ -1,4 +1,4 @@
-package com.fernandoalencar.gerenciador_de_sinuca.core;
+package com.fernandoalencar.gerenciador_de_sinuca.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
