@@ -54,9 +54,5 @@ public class MovimentacaoController {
 	private MovimentacaoModel toModel(Movimentacao movimentacao) {
 		return modelMapper.map(movimentacao, MovimentacaoModel.class);
 	}
-	
-	private List<MovimentacaoModel> toCollectionModel(List<Movimentacao> movimentacoes){
-		return movimentacoes.stream().map(movimentacao -> toModel(movimentacao)).collect(Collectors.toList());
-	}
-	
+
 }

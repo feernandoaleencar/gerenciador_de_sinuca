@@ -142,10 +142,6 @@ public class SinucaController {
 		return modelMapper.map(sinuca, SinucaModel.class);
 	}
 
-	private List<SinucaModel> toCollectionModel(List<Sinuca> sinucas) {
-		return sinucas.stream().map(sinuca -> toModel(sinuca)).collect(Collectors.toList());
-	}
-
 	private Sinuca toEntity(SinucaInputModel sinucaInputModel) {
 		return modelMapper.map(sinucaInputModel, Sinuca.class);
 	}
