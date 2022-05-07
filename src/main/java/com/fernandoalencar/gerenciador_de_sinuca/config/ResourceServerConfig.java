@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 
-    @Autowired
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("admin")
@@ -40,6 +40,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
@@ -47,6 +48,13 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .csrf().disable()
                 .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter());
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        var secretKey = new SecretKeySpec("3032885ba9cd6621bcc4e7d6b6c35c2b".getBytes(), "HmacSHA256");
+
+        return NimbusJwtDecoder.withSecretKey(secretKey).build();
     }
 
     @Bean
@@ -58,13 +66,6 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        var secretKey = new SecretKeySpec("3032885ba9cd6621bcc4e7d6b6c35c2b".getBytes(), "HmacSHA256");
-
-        return NimbusJwtDecoder.withSecretKey(secretKey).build();
     }
 
     private JwtAuthenticationConverter jwtAuthenticationConverter() {
